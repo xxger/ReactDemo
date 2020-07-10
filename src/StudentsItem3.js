@@ -7,6 +7,16 @@ class StudentsItem3 extends Component {
         super(props)
         this.handleClick = this.handleClick.bind(this)  //此写法节约性能
     }
+    shouldComponentUpdate(nextProps,nextState){
+        if(nextProps.content !== this.props.content){
+            return true
+        }else{
+            return false
+        }
+    }
+    componentWillUnmount(){
+        console.log('componentWillUnmount--组件从页面中删除的时候执行')
+    }
     render() { 
         return (
             <li onClick={this.handleClick}>{this.props.firstName}+{this.props.content}</li>
