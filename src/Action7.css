@@ -1,0 +1,25 @@
+button{
+    width:100px;
+    height:30px;
+}
+.teacher-text-enter{
+    opacity: 0;
+    color:red;
+}
+.teacher-text-enter-active{
+    opacity: 1;
+    color:red;
+    transition:opacity 1000ms;
+    -webkit-transition:opacity 1000ms;
+    -moz-transition:opacity 1000ms;
+    -ms-transition:opacity 1000ms;
+    -o-transition:opacity 1000ms;
+}
+.teacher-text-enter-done{
+    opacity: 1;
+    color:blue;
+}
+.teacher-text-exit{
+    opacity: 1;
+    color:blue;
+}
