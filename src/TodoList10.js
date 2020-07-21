@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 // import {Input,Button,List} from 'antd'
 import store from './store'
 // import { CHANGE_IPT , ADD_ITEM , DELETE_ITEM } from './store/actionTypes'
-import { changeIptAction, addItemAction , deleteItemAction } from './store/actionCreators'
+import { changeIptAction, addItemAction , deleteItemAction , getListAction } from './store/actionCreators'
 import TodoListUI from './TodoListUI'
+import Axios from 'axios';
 
 class TodoList10 extends Component {
     constructor(props) {
@@ -13,11 +14,19 @@ class TodoList10 extends Component {
         this.changeIptVal = this.changeIptVal.bind(this)
         this.clickBtn = this.clickBtn.bind(this)
         this.deleteItem = this.deleteItem.bind(this)
-        
+
         this.storeChange = this.storeChange.bind(this)
         this.storeClick = this.storeClick.bind(this)
         
         store.subscribe(this.storeChange)  //订阅Redux状态，新版不用写这一句
+    }
+    componentDidMount(){
+        Axios.get('http://rap2.taobao.org:38080/app/mock/260730/demo')
+            .then((res)=>{
+                const data = res.data
+                const action = getListAction(data)
+                store.dispatch(action)
+            })
     }
     render() { 
         return (
@@ -38,25 +47,14 @@ class TodoList10 extends Component {
     }
     changeIptVal(e){
         const action = changeIptAction(e.target.value)
-        // const action = {
-        //     type:CHANGE_IPT,
-        //     value:e.target.value
-        // }
         store.dispatch(action)
     }
     clickBtn(){
         const action = addItemAction()
-        // const action={
-        //     type:ADD_ITEM
-        // }
         store.dispatch(action)
     }
     deleteItem(index){
         const action = deleteItemAction(index)
-        // const action={
-        //     type:DELETE_ITEM,
-        //     index
-        // }
         store.dispatch(action)
     }
 }

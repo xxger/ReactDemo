@@ -1,4 +1,4 @@
-import { CHANGE_IPT , ADD_ITEM , DELETE_ITEM } from './actionTypes'
+import { CHANGE_IPT , ADD_ITEM , DELETE_ITEM , GET_LIST } from './actionTypes'
 
 const defaultState = {
     iptVal:'write something',
@@ -19,6 +19,11 @@ export default (state = defaultState,action)=>{
     if(action.type === DELETE_ITEM){
         let newState = JSON.parse(JSON.stringify(state))
         newState.list.splice(action.index,1);
+        return newState
+    }
+    if(action.type === GET_LIST){
+        let newState = JSON.parse(JSON.stringify(state))
+        newState.list = action.data.list;
         return newState
     }
     return state
