@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import 'antd/dist/antd.css'
-import {Input,Button,List} from 'antd'
+// import 'antd/dist/antd.css'
+// import {Input,Button,List} from 'antd'
 import store from './store'
 // import { CHANGE_IPT , ADD_ITEM , DELETE_ITEM } from './store/actionTypes'
 import { changeIptAction, addItemAction , deleteItemAction } from './store/actionCreators'
+import TodoListUI from './TodoListUI'
 
 class TodoList10 extends Component {
     constructor(props) {
@@ -11,7 +12,8 @@ class TodoList10 extends Component {
         this.state=store.getState();
         this.changeIptVal = this.changeIptVal.bind(this)
         this.clickBtn = this.clickBtn.bind(this)
-
+        this.deleteItem = this.deleteItem.bind(this)
+        
         this.storeChange = this.storeChange.bind(this)
         this.storeClick = this.storeClick.bind(this)
         
@@ -19,26 +21,13 @@ class TodoList10 extends Component {
     }
     render() { 
         return (
-            <div>
-                <Input 
-                    style={{width:'300px'}}
-                    value={this.state.iptVal}
-                    onChange={this.changeIptVal}                
-                />
-                <Button 
-                    type='primary'
-                    onClick={this.clickBtn}
-                >新增</Button>
-                <List
-                    bordered
-                    dataSource = {this.state.list}
-                    renderItem={
-                        (item,index)=>(
-                            <List.Item onClick={this.deleteItem.bind(this,index)}>{item}</List.Item>
-                        )
-                    }
-                ></List>
-            </div>
+            <TodoListUI
+                iptVal = {this.state.iptVal}
+                list={this.state.list}
+                changeIptVal={this.changeIptVal}
+                clickBtn={this.clickBtn}
+                deleteItem={this.deleteItem}
+            />
         );
     }
     storeChange(){
