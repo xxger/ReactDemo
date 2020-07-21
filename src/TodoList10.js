@@ -13,7 +13,7 @@ class TodoList10 extends Component {
         this.storeChange = this.storeChange.bind(this)
         this.storeClick = this.storeClick.bind(this)
         
-        // store.subscribe(this.storeChange)  //订阅Redux状态，新版不用写这一句
+        store.subscribe(this.storeChange)  //订阅Redux状态，新版不用写这一句
     }
     render() { 
         return (
@@ -30,7 +30,7 @@ class TodoList10 extends Component {
                     bordered
                     dataSource = {this.state.list}
                     renderItem={
-                        item=>(
+                        (item,index)=>(
                             <List.Item>{item}</List.Item>
                         )
                     }
