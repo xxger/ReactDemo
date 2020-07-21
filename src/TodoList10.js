@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import 'antd/dist/antd.css'
 import {Input,Button,List} from 'antd'
 import store from './store'
+// import { CHANGE_IPT , ADD_ITEM , DELETE_ITEM } from './store/actionTypes'
+import { changeIptAction, addItemAction , deleteItemAction } from './store/actionCreators'
 
 class TodoList10 extends Component {
     constructor(props) {
@@ -20,6 +22,7 @@ class TodoList10 extends Component {
             <div>
                 <Input 
                     style={{width:'300px'}}
+                    value={this.state.iptVal}
                     onChange={this.changeIptVal}                
                 />
                 <Button 
@@ -31,7 +34,7 @@ class TodoList10 extends Component {
                     dataSource = {this.state.list}
                     renderItem={
                         (item,index)=>(
-                            <List.Item>{item}</List.Item>
+                            <List.Item onClick={this.deleteItem.bind(this,index)}>{item}</List.Item>
                         )
                     }
                 ></List>
@@ -45,16 +48,26 @@ class TodoList10 extends Component {
         this.setState(store.getState())
     }
     changeIptVal(e){
-        const action = {
-            type:'changeIpt',
-            value:e.target.value
-        }
+        const action = changeIptAction(e.target.value)
+        // const action = {
+        //     type:CHANGE_IPT,
+        //     value:e.target.value
+        // }
         store.dispatch(action)
     }
     clickBtn(){
-        const action={
-            type:'addItem'
-        }
+        const action = addItemAction()
+        // const action={
+        //     type:ADD_ITEM
+        // }
+        store.dispatch(action)
+    }
+    deleteItem(index){
+        const action = deleteItemAction(index)
+        // const action={
+        //     type:DELETE_ITEM,
+        //     index
+        // }
         store.dispatch(action)
     }
 }
