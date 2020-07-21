@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 // import {Input,Button,List} from 'antd'
 import store from './store'
 // import { CHANGE_IPT , ADD_ITEM , DELETE_ITEM } from './store/actionTypes'
-import { changeIptAction, addItemAction , deleteItemAction , getListAction } from './store/actionCreators'
+import { changeIptAction, addItemAction , deleteItemAction , getTodoList } from './store/actionCreators'
 import TodoListUI from './TodoListUI'
-import Axios from 'axios';
+// import axios from 'axios';
 
 class TodoList10 extends Component {
     constructor(props) {
@@ -21,12 +21,8 @@ class TodoList10 extends Component {
         store.subscribe(this.storeChange)  //订阅Redux状态，新版不用写这一句
     }
     componentDidMount(){
-        Axios.get('http://rap2.taobao.org:38080/app/mock/260730/demo')
-            .then((res)=>{
-                const data = res.data
-                const action = getListAction(data)
-                store.dispatch(action)
-            })
+        const action = getTodoList();
+        store.dispatch(action)
     }
     render() { 
         return (
