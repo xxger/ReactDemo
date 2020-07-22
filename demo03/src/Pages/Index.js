@@ -12,6 +12,7 @@ class Index extends Component {
                 {cid:789,title:'文章标题-3'},
             ]
          }
+         this.props.history.push('/home/')
     }
     render() { 
         return ( 
