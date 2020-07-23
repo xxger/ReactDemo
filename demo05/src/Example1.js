@@ -1,12 +1,15 @@
 import React, { useState} from 'react';
 
 function Example1(){
-    const [count , setCount] = useState(0)
+    const [name , setName] = useState('小明')
+    const [sex , setSex] = useState('男')
+    const [age , setAge] = useState('18')
     return(
-        <div>
-            <p>已点击{count}次</p>
-            <button onClick={()=>{setCount(count+1)}}>点击</button>
-        </div>
+        <ul>
+            <li>姓名：{name}</li>
+            <li>性别：{sex}</li>
+            <li>年龄：{age}</li>
+        </ul>
     )
 }
 
